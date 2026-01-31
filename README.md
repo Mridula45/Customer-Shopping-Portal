@@ -11,3 +11,11 @@ amount, date, and order status.
 5. All user actions and data management (login, ordering, product listing) are performed
 dynamically through the web interface, ensuring data integrity and a smooth user
 experience
+
+Installation & Initial Setup Workflow (XAMPP)
+Install XAMPP to set up the Apache web server, PHP runtime, and MySQL database in a local environment.
+Start Apache and MySQL services using the XAMPP Control Panel.
+Clone the GitHub repository into the htdocs directory of the XAMPP installation.
+Create the required MySQL database using phpMyAdmin and import the provided SQL file.
+Configure the database connection settings in the PHP configuration file.
+Access the application through a web browser using http://localhost/.
