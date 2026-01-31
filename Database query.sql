@@ -1,0 +1,57 @@
+To Create schema and tables in MYSQL
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS,
+FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE,
+SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_I
+N_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_S
+UBSTITUTION';
+-- Schema mydb
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+-- Table `mydb`.`customer`
+CREATE TABLE IF NOT EXISTS `mydb`.`customer` (
+`cust_id` INT NOT NULL AUTO_INCREMENT,
+`cust_name` VARCHAR(45) NOT NULL,
+`phone_no` VARCHAR(10) NULL,
+`address` VARCHAR(100) NULL,
+PRIMARY KEY (`cust_id`),
+UNIQUE INDEX `phone no_UNIQUE` (`phone_no` ASC)
+) ENGINE=InnoDB;
+-- Table `mydb`.`product`
+CREATE TABLE IF NOT EXISTS `mydb`.`product` (
+`prod_id` INT NOT NULL AUTO_INCREMENT,
+`prod_name` VARCHAR(45) NOT NULL,
+`price` DECIMAL(10,2) NULL,
+`date` DATE NULL,
+PRIMARY KEY (`prod_id`)
+) ENGINE=InnoDB;
+-- Table `mydb`.`orders`
+CREATE TABLE IF NOT EXISTS `mydb`.`orders` (
+`ord_id` INT NOT NULL AUTO_INCREMENT,
+`cust_id` INT NOT NULL,
+`ord_date` DATE NOT NULL,
+`total_amount` FLOAT NULL,
+`status` VARCHAR(20) NULL DEFAULT 'Pending',
+PRIMARY KEY (`ord_id`),
+FOREIGN KEY (`cust_id`) REFERENCES `mydb`.`customer` (`cust_id`) ON DELETE
+CASCADE
+) ENGINE=InnoDB;
+-- Table `mydb`.`product_has_orders`
+CREATE TABLE IF NOT EXISTS `mydb`.`product_has_orders` (
+`orders_ord_id` INT NOT NULL,
+`prod_id` INT NOT NULL,
+PRIMARY KEY (`orders_ord_id`, `prod_id`),
+FOREIGN KEY (`orders_ord_id`) REFERENCES `mydb`.`orders` (`ord_id`) ON
+DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`prod_id`) REFERENCES `mydb`.`product` (`prod_id`) ON DELETE
+CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;FOREIGN KEY (`prod_id`) REFERENCES `mydb`.`product` (`prod_id`) ON DELETE
+CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
